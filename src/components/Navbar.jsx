@@ -7,6 +7,7 @@ import { ChevronDown, Gift, History, LogOut, Menu, Scissors, User, UserCircle, X
 import { PromoBar } from "./PromoBar";
 import { BRANCHES, NAV_ITEMS } from "../data/barbershop";
 
+
 export function Header({ stage, go, branch, setBranch, points, menuOpen, setMenuOpen, userName, onLogout }) {
   const [profileOpen, setProfileOpen] = useState(false);
   const profileRef = useRef(null);
@@ -23,10 +24,18 @@ export function Header({ stage, go, branch, setBranch, points, menuOpen, setMenu
     <header className="kc-header">
       <PromoBar />
       <div className="kc-header-row">
-        <button className="kc-logo" onClick={() => go("home")}>
-          <span className="kc-logo-mark"><Scissors size={17} strokeWidth={2.4} /></span>
-          CARTENZ<span className="kc-logo-dot">.BARBER</span>
-        </button>
+     <button className="kc-logo" onClick={() => go("home")}>
+    <img
+        src="/logo.png"
+        alt="Logo"
+        className="kc-logo-image"
+    />
+
+<div className="kc-logo-text">
+        <span className="kc-logo-main">CARTENZ BARBERSHOP</span>
+
+    </div>
+</button>
 
         <nav className="kc-nav-desktop">
           {NAV_ITEMS.map((it) => (

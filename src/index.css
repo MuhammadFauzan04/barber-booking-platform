@@ -42,9 +42,38 @@
       .kc-promobar-time { font-family:'JetBrains Mono',monospace; color: var(--kc-accent); font-weight:700; }
       .kc-header { position: sticky; top:0; z-index: 30; background: rgba(255,255,255,0.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--kc-line); }
       .kc-header-row { max-width: 100%; margin:0; display:flex; align-items:center; justify-content:space-between; padding: 12px var(--kc-pad); }
-      .kc-logo { display:flex; align-items:center; gap:8px; background:none; border:none; color: var(--kc-ink); font-family:'Anton',sans-serif; font-size: 19px; letter-spacing: .5px; }
-      .kc-logo-mark { background: var(--kc-accent); color:#fff; width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; }
-      .kc-logo-dot { color: var(--kc-accent); }
+      .kc-logo{
+        display:flex;
+        align-items:center;
+        gap:4px;
+        background:none;
+        border:none;
+        cursor:pointer;
+        padding:0;
+    }
+    
+    .kc-logo-image{
+        width:52px;
+        height:52px;
+        border-radius:12px;
+        object-fit:cover;
+        flex-shrink:0;
+    }
+    
+    .kc-logo-text{
+        display:flex;
+        align-items:baseline;
+        gap:none;
+    }
+    
+    .kc-logo-main{
+        font-family:'inter', sans-serif;
+        font-size:18px;
+        line-height:1;
+        color:#222;
+        letter-spacing:0.5px;
+    }
+    
       .kc-nav-desktop { display:flex; gap:4px; }
       .kc-nav-link { background:none; border:none; color: var(--kc-ink-dim); padding:8px 13px; border-radius:999px; font-size:13.5px; font-weight:600; transition: all .15s; }
       .kc-nav-link.active, .kc-nav-link:hover { color:#fff; background: var(--kc-ink); }
@@ -968,9 +997,17 @@
          30% of the width), clipping the wrapper to 18% shows exactly the
          top 60% of the glyphs (18 / 30 = 0.6) — the rest bleeds off below
          the visible edge, which is the intended "cropped to 60%" look. */
-      .kc-footer-watermark-wrap {
-        position: relative; z-index: 1; width: 100%; height: 0; padding-bottom: 18%;
-        margin-top: -8px; overflow: hidden; pointer-events: none;
+         .kc-footer-watermark-wrap{
+          position: relative;
+          width:100vw;
+          left:50%;
+          transform:translateX(-50%);
+          overflow:hidden;
+      
+          height:180px;
+          margin-top:-10px;
+      
+          padding:0;
       }
       .kc-footer-watermark-svg { position:absolute; top:0; left:0; width:100%; height:auto; display:block; }
       .kc-footer-watermark-text {

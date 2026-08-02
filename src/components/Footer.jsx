@@ -75,9 +75,9 @@ export function Footer({ go }) {
           bottom edge of the footer.
       */}
       <div className="kc-footer-watermark-wrap" aria-hidden="true">
-        <svg className="kc-footer-watermark-svg" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMin meet">
-          <text x="500" y="230" textAnchor="middle" textLength="1000" lengthAdjust="spacingAndGlyphs" className="kc-footer-watermark-text">
-            CARTENZ
+        <svg className="kc-footer-watermark-svg" viewBox="0 0 1450 300" preserveAspectRatio="none">
+          <text x="725" y="230" textAnchor="middle" textLength="1500" lengthAdjust="spacingAndGlyphs" className="kc-footer-watermark-text">
+            CARTENZ BARBERSHOP
           </text>
         </svg>
       </div>
