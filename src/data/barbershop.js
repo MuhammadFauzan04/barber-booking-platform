@@ -82,6 +82,66 @@ export const PROMOS = [
   { id: "p3", title: "Gratis Creambath tiap Booking ke-5", desc: "Otomatis didapat lewat program poin.", code: "LOYAL5", type: "flat", value: 0, max: 0 },
 ];
 
+export const PROMO_CATEGORIES = [
+  { id: "semua", label: "Semua", icon: Sparkles },
+  { id: "diskon", label: "Diskon", icon: Ticket },
+  { id: "cashback", label: "Cashback", icon: Wallet },
+  { id: "member", label: "Member", icon: BadgeCheck },
+  { id: "berakhir", label: "Segera Berakhir", icon: Clock },
+];
+
+export const FEATURED_PROMOS = [
+  {
+    id: "fp1",
+    badge: "PALING POPULER",
+    badgeIcon: Flame,
+    title: "Diskon Member Baru",
+    titleLine2: "10% Semua Layanan",
+    big: "10",
+    bigSuffix: "%",
+    desc: "Berlaku untuk booking pertama di semua cabang.",
+    note: "Maks. potongan Rp 30.000",
+    code: "NEWMEMBER10",
+    expiry: "Berlaku sampai 31 Agu 2026",
+  },
+  {
+    id: "fp2",
+    badge: "LOYALTY",
+    badgeIcon: Crown,
+    title: "Gratis Creambath",
+    titleLine2: "di Booking ke-5",
+    progress: 3,
+    progressTotal: 5,
+    desc: "Kumpulkan 5 booking dan creambath berikutnya gratis.",
+    code: "LOYAL5",
+    expiry: "Program berjalan terus",
+  },
+];
+
+export const ALL_PROMOS = [
+  { id: "p1", category: "diskon", tone: "teal", icon: Ticket, title: "Member Baru Diskon 10%", desc: "Berlaku untuk booking pertama di semua cabang.", code: "NEWMEMBER10", expiry: "s.d. 31 Agu 2026" },
+  { id: "p2", category: "diskon", tone: "amber", icon: Scissors, title: "Potong + Coloring Hemat 50rb", desc: "Minimal transaksi Rp 250.000.", code: "COLOR50", expiry: "s.d. 20 Agu 2026" },
+  { id: "p3", category: "member", tone: "purple", icon: Gift, title: "Gratis Creambath tiap Booking ke-5", desc: "Otomatis didapat lewat program poin.", code: "LOYAL5", expiry: "Selalu aktif" },
+  { id: "p4", category: "cashback", tone: "blue", icon: Wallet, title: "Cashback Poin 5%", desc: "Setiap transaksi otomatis dapat poin tambahan.", code: "POIN5", expiry: "s.d. 15 Agu 2026" },
+  { id: "p5", category: "cashback", tone: "teal", icon: CreditCard, title: "Diskon Bayar QRIS", desc: "Potongan langsung untuk pembayaran non-tunai.", code: "QRIS15", expiry: "s.d. 10 Agu 2026" },
+  { id: "p6", category: "diskon", tone: "amber", icon: Banknote, title: "Hemat Kids Haircut", desc: "Khusus potongan anak di bawah 12 tahun.", code: "KIDS20", expiry: "s.d. 25 Agu 2026" },
+  { id: "p7", category: "member", tone: "purple", icon: BadgeCheck, title: "Upgrade Gratis ke Gold", desc: "Member baru langsung naik ke tier Gold.", code: "GOLDUP", expiry: "s.d. 5 Sep 2026" },
+  { id: "p8", category: "diskon", tone: "blue", icon: Sparkles, title: "Diskon Treatment 15%", desc: "Untuk semua layanan creambath & hair spa.", code: "SPA15", expiry: "s.d. 12 Agu 2026" },
+];
+
+export const EXPIRING_PROMOS = [
+  { id: "e1", icon: Ticket, title: "Diskon Bayar QRIS", code: "QRIS15", days: 2, hours: 14 },
+  { id: "e2", icon: Sparkles, title: "Diskon Treatment 15%", code: "SPA15", days: 4, hours: 6 },
+  { id: "e3", icon: Wallet, title: "Cashback Poin 5%", code: "POIN5", days: 6, hours: 21 },
+];
+
+export const MEMBER_BENEFITS = [
+  { id: "mb1", icon: Timer, label: "Booking Prioritas", desc: "Slot booking didahulukan" },
+  { id: "mb2", icon: Gift, label: "Hadiah Ulang Tahun", desc: "Voucher spesial tiap tahun" },
+  { id: "mb3", icon: CreditCard, label: "Poin 2x Lipat", desc: "Setiap transaksi hari kerja" },
+  { id: "mb4", icon: Wallet, label: "Cashback Ekstra", desc: "Untuk pembayaran non-tunai" },
+];
+
 export const REDEEMABLE_VOUCHERS = [
   { id: "v1", points: 100, label: "Voucher Rp 20.000", type: "flat", value: 20000 },
   { id: "v2", points: 200, label: "Voucher Rp 50.000", type: "flat", value: 50000 },
