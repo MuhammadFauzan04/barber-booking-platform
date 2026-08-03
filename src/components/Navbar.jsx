@@ -3,14 +3,19 @@
    convention). */
 
 import React, { useState, useEffect, useRef } from "react";
-import { ChevronDown, Gift, History, LogOut, Menu, Scissors, User, UserCircle, X } from "lucide-react";
+import { Bell, ChevronDown, Gift, History, LogOut, Menu, Scissors, User, UserCircle, X } from "lucide-react";
 import { PromoBar } from "./PromoBar";
-import { BRANCHES, NAV_ITEMS } from "../data/barbershop";
+import { NotificationPanel } from "./NotificationCenter";
+import { BRANCHES, NAV_ITEMS, NOTIFICATIONS } from "../data/barbershop";
 
+const NOTIF_TARGET_TIME = Date.now() + (1 * 3600 + 43 * 60 + 15) * 1000;
 
 export function Header({ stage, go, branch, setBranch, points, menuOpen, setMenuOpen, userName, onLogout }) {
   const [profileOpen, setProfileOpen] = useState(false);
+  const [notifItems, setNotifItems] = useState(NOTIFICATIONS);
+  const [notifTab, setNotifTab] = useState("semua");
   const profileRef = useRef(null);
+  const unreadCount = notifItems.filter((n) => n.unread).length;
 
   useEffect(() => {
     const onDocClick = (e) => {
@@ -59,29 +64,22 @@ export function Header({ stage, go, branch, setBranch, points, menuOpen, setMenu
           <div className="kc-user-menu" ref={profileRef}>
             <button className="kc-user-chip" onClick={() => setProfileOpen((v) => !v)}>
               <User size={14} /> {userName || "Tamu"}
+              {unreadCount > 0 && <span className="kc-user-chip-dot" />}
               <ChevronDown size={12} className={"kc-user-chip-caret" + (profileOpen ? " open" : "")} />
             </button>
             {profileOpen && (
-              <div className="kc-user-dropdown">
-                <div className="kc-user-dropdown-head">
-                  <div className="kc-user-dropdown-avatar">{(userName || "Tamu").split(" ").map((n) => n[0]).join("").slice(0, 2)}</div>
-                  <div>
-                    <div className="kc-user-dropdown-name">{userName || "Tamu"}</div>
-                    <div className="kc-user-dropdown-sub">{userName ? "Member Silver" : "Belum masuk akun"}</div>
-                  </div>
-                </div>
-                <div className="kc-user-dropdown-divider" />
-                <button className="kc-user-dropdown-item" onClick={() => { setProfileOpen(false); go("profile"); }}>
-                  <UserCircle size={16} /> Lihat Profil
-                </button>
-                <button className="kc-user-dropdown-item" onClick={() => { setProfileOpen(false); go("history"); }}>
-                  <History size={16} /> Riwayat Booking
-                </button>
-                <div className="kc-user-dropdown-divider" />
-                <button className="kc-user-dropdown-item danger" onClick={() => { setProfileOpen(false); onLogout(); }}>
-                  <LogOut size={16} /> Keluar
-                </button>
-              </div>
+              <NotificationPanel
+                userName={userName}
+                points={points}
+                go={go}
+                onLogout={onLogout}
+                onClose={() => setProfileOpen(false)}
+                items={notifItems}
+                setItems={setNotifItems}
+                tab={notifTab}
+                setTab={setNotifTab}
+                targetTime={NOTIF_TARGET_TIME}
+              />
             )}
           </div>
           <button className="kc-menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
@@ -99,6 +97,9 @@ export function Header({ stage, go, branch, setBranch, points, menuOpen, setMenu
             </button>
           ))}
           <div className="kc-nav-mobile-divider" />
+          <button className="kc-nav-link" onClick={() => { setMenuOpen(false); setProfileOpen(true); }}>
+            <Bell size={15} /> Notifikasi {unreadCount > 0 && <span className="kc-user-chip-dot" style={{ position: "static", marginLeft: 4 }} />}
+          </button>
           <button className="kc-nav-link" onClick={() => { go("profile"); setMenuOpen(false); }}><UserCircle size={15} /> Lihat Profil</button>
           <button className="kc-nav-link" onClick={() => { go("history"); setMenuOpen(false); }}><History size={15} /> Riwayat Booking</button>
           <button className="kc-nav-link" onClick={() => { setMenuOpen(false); onLogout(); }}><LogOut size={15} /> Keluar</button>

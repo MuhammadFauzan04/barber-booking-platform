@@ -1,7 +1,7 @@
 /* Mock data for the Cartenz Barbershop demo — branches, capsters,
    services, testimonials, FAQs, and every small constant the UI needs. */
 
-import { BadgeCheck, Banknote, Brain, Check, Clock, CreditCard, Crown, Droplet, Flame, Gift, Hand, MapPinned, Scissors, Smartphone, Sparkles, Star, Ticket, Timer, Wallet, Waves, Wind } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, Bell, Brain, Calendar, CalendarCheck, Check, Clock, CreditCard, Crown, Droplet, ExternalLink, Flame, Gift, Hand, Lightbulb, MapPinned, QrCode, Scissors, Smartphone, Sparkles, Star, Tag, Ticket, Timer, Wallet, Waves, Wind } from "lucide-react";
 
 export const BRANCHES = [
   { id: "kmg", name: "Kemang", city: "Jakarta Selatan" },
@@ -365,4 +365,82 @@ export const POINT_HISTORY = [
   { id: "h2", label: "Booking - Haircut Reguler (Fajar Nugraha)", date: "10 Jul 2026", points: 15 },
   { id: "h3", label: "Tukar Voucher Rp 20.000", date: "02 Jul 2026", points: -100 },
 ];
+
+/* ================================================================== */
+/* NOTIFICATION CENTER — dropdown opened from the navbar account chip  */
+/* ================================================================== */
+
+export const NOTIFICATION_TABS = [
+  { id: "semua", label: "Semua", icon: Bell },
+  { id: "hari-ini", label: "Hari Ini", icon: Calendar },
+  { id: "booking", label: "Booking", icon: CalendarCheck },
+  { id: "promo", label: "Promo", icon: Ticket },
+  { id: "membership", label: "Membership", icon: Crown },
+  { id: "inspirasi", label: "Inspirasi", icon: Lightbulb },
+];
+
+export const NOTIFICATIONS = [
+  {
+    id: "n1", category: "booking", today: true, unread: true, badge: "Baru", tone: "green", icon: CalendarCheck,
+    title: "Booking Dikonfirmasi",
+    desc: "Booking kamu dengan Dimas Aditya pada Sabtu, 3 Agustus 2025 14:00 di Centre Point telah dikonfirmasi.",
+    chips: [
+      { icon: Calendar, label: "Sabtu, 3 Agu 2025" },
+      { icon: Clock, label: "14:00" },
+      { icon: Scissors, label: "Haircut + Hair Wash" },
+    ],
+    time: "2 menit yang lalu",
+    cta: { label: "Lihat Booking", icon: ArrowRight, tone: "dark" }, target: "history",
+  },
+  {
+    id: "n2", category: "booking", today: true, unread: true, badge: "Baru", tone: "blue", icon: Clock,
+    title: "Reminder: Booking Dimulai 30 Menit Lagi",
+    desc: "Booking kamu akan dimulai pukul 14:00. Jangan lupa datang tepat waktu ya!",
+    time: "13:30",
+    cta: { label: "Buka QR Check-in", icon: QrCode, tone: "blue" }, target: "journey",
+  },
+  {
+    id: "n3", category: "promo", today: true, unread: true, badge: "Baru", tone: "amber", icon: Ticket,
+    title: "Voucher Baru Untukmu!",
+    desc: "Kamu mendapatkan voucher diskon 20% untuk semua layanan. Berlaku sampai 10 Agustus 2025.",
+    time: "11:05",
+    cta: { label: "Gunakan Voucher", icon: Tag, tone: "amber" }, target: "promo",
+  },
+  {
+    id: "n4", category: "booking", today: false, unread: true, tone: "purple", icon: Star,
+    title: "Yuk, Beri Review!",
+    desc: "Bagaimana hasil potonganmu bersama Dimas Aditya? Review-mu sangat berarti untuk kami dan capster lainnya.",
+    time: "Kemarin",
+    cta: { label: "Beri Review", icon: Star, tone: "purple" }, target: "history",
+  },
+  {
+    id: "n5", category: "inspirasi", today: false, unread: true, badge: "Baru", tone: "green", icon: Lightbulb,
+    title: "Inspirasi Baru Telah Tersedia",
+    desc: "10 gaya Fade terbaru telah ditambahkan. Temukan gaya yang cocok untukmu sekarang!",
+    time: "Kemarin",
+    cta: { label: "Lihat Inspirasi", icon: ExternalLink, tone: "greenOutline" }, target: "inspiration",
+  },
+  {
+    id: "n6", category: "membership", today: false, unread: false, tone: "green", icon: Gift,
+    title: "+75 Poin Ditambahkan",
+    desc: "Kamu mendapatkan 75 poin dari transaksi Haircut Premium. Terus kumpulkan poin untuk mendapatkan reward menarik.",
+    time: "2 hari lalu",
+    cta: { label: "Lihat Poin", icon: Gift, tone: "greenOutline" }, target: "points",
+  },
+];
+
+export const NEXT_BOOKING_NOTIF = {
+  capsterName: "Dimas Aditya",
+  rating: 4.8,
+  service: "Haircut + Hair Wash",
+  branchName: "Centre Point",
+  dateLabel: "Sab, 3 Agu",
+  timeLabel: "14:00",
+};
+
+export const ACTIVE_VOUCHER_NOTIF = {
+  title: "Diskon 20% Semua Layanan",
+  desc: "Berlaku sampai 10 Agu 2025",
+  code: "GC20AUG",
+};
 
