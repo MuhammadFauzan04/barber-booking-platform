@@ -145,7 +145,7 @@ export const MEMBER_BENEFITS = [
 export const REDEEMABLE_VOUCHERS = [
   { id: "v1", points: 100, label: "Voucher Rp 20.000", type: "flat", value: 20000 },
   { id: "v2", points: 200, label: "Voucher Rp 50.000", type: "flat", value: 50000 },
-  { id: "v3", points: 400, label: "Voucher Rp 120.000", type: "flat", value: 120000 },
+  { id: "v3", points: 400, label: "Voucher Rp 100.000", type: "flat", value: 100000 },
 ];
 
 export const PAYMENT_METHODS = [
@@ -165,13 +165,35 @@ export const MOMENTS = [
 ];
 
 export const BOOKING_HISTORY = [
-  { id: "H-2031", date: "28 Jul 2026", service: "Skin Fade + Beard Sculpt", capster: "Rangga Putra Wijaya", branch: "Kemang", price: 145000, status: "Selesai" },
-  { id: "H-2018", date: "14 Jul 2026", service: "Classic Taper", capster: "Dimas Aji Nugroho", branch: "Kemang", price: 85000, status: "Selesai" },
-  { id: "H-1994", date: "29 Jun 2026", service: "Perm Design", capster: "Fajar Nur Ramadhan", branch: "Kebayoran Baru", price: 320000, status: "Selesai" },
-  { id: "H-1972", date: "11 Jun 2026", service: "Buzz Cut", capster: "Rangga Putra Wijaya", branch: "Kemang", price: 60000, status: "Dibatalkan" },
-  { id: "H-1950", date: "25 Mei 2026", service: "Pompadour + Hair Spa", capster: "Bimo Satria", branch: "Dago", price: 210000, status: "Selesai" },
-  { id: "H-1928", date: "6 Mei 2026", service: "Mullet Revival", capster: "Fajar Nur Ramadhan", branch: "Kebayoran Baru", price: 165000, status: "Selesai" },
+  { id: "H-2031", date: "28 Jul 2026", time: "10:00", service: "Skin Fade + Beard Sculpt", capster: "Rangga Putra Wijaya", branch: "Kemang", price: 145000, status: "Selesai" },
+  { id: "H-2018", date: "14 Jul 2026", time: "14:30", service: "Classic Taper", capster: "Dimas Aji Nugroho", branch: "Kemang", price: 85000, status: "Selesai" },
+  { id: "H-1994", date: "29 Jun 2026", time: "11:00", service: "Perm Design", capster: "Fajar Nur Ramadhan", branch: "Kebayoran Baru", price: 320000, status: "Selesai" },
+  { id: "H-1972", date: "11 Jun 2026", time: "09:30", service: "Buzz Cut", capster: "Rangga Putra Wijaya", branch: "Kemang", price: 60000, status: "Dibatalkan" },
+  { id: "H-1950", date: "25 Mei 2026", time: "13:00", service: "Pompadour + Hair Spa", capster: "Bimo Satria", branch: "Dago", price: 210000, status: "Selesai" },
+  { id: "H-1928", date: "6 Mei 2026", time: "15:30", service: "Mullet Revival", capster: "Fajar Nur Ramadhan", branch: "Kebayoran Baru", price: 165000, status: "Selesai" },
 ];
+
+/* ================================================================== */
+/* RIWAYAT BOOKING PAGE — lifetime stats + spending summary            */
+/* ================================================================== */
+
+export const HISTORY_FILTERS = ["Semua", "Selesai", "Dijadwalkan", "Dibatalkan"];
+
+export const HISTORY_STATS = {
+  totalBooking: 18,
+  selesai: 15,
+  selesaiPct: 83,
+  dibatalkan: 1,
+  dibatalkanPct: 5,
+  totalPembayaran: 985000,
+};
+
+export const EXPENSE_SUMMARY = {
+  totalPembayaran: 985000,
+  rataRata: 164167,
+  bookingTerbanyak: 6,
+  hemat: 235000,
+};
 
 export const INSTAGRAM_STATS = { handle: "@cartenzbarbershop", posts: "1.487", followers: "13,8rb", following: "189" };
 
@@ -364,6 +386,29 @@ export const POINT_HISTORY = [
   { id: "h1", label: "Booking - Haircut + Beard (Rangga Putra)", date: "24 Jul 2026", points: 24 },
   { id: "h2", label: "Booking - Haircut Reguler (Fajar Nugraha)", date: "10 Jul 2026", points: 15 },
   { id: "h3", label: "Tukar Voucher Rp 20.000", date: "02 Jul 2026", points: -100 },
+  { id: "h4", label: "Booking - Haircut + Hairwash", date: "28 Jun 2026", points: 50 },
+];
+
+/* ================================================================== */
+/* POIN & REWARDS PAGE — member stats, gold-tier benefits, achievements */
+/* ================================================================== */
+
+export const MEMBER_STATS = { totalBooking: 18, totalHemat: 420000 };
+
+export const GOLD_TIER_TARGET = 500;
+export const GOLD_BENEFITS = [
+  "Diskon 10% untuk semua layanan",
+  "Booking Prioritas",
+  "Bonus Poin 2x",
+  "Promo Eksklusif Member",
+];
+
+export const ACHIEVEMENTS = [
+  { id: "ac1", title: "Booking Pertama", desc: "Selamat! Kamu sudah memulai perjalanan", icon: Scissors, unlocked: true },
+  { id: "ac2", title: "Member Silver", desc: "Kumpulkan 250 poin", icon: BadgeCheck, unlocked: true },
+  { id: "ac3", title: "Booking 10x", desc: "Booking 10 kali untuk mendapatkan bonus", icon: CalendarCheck, unlocked: false },
+  { id: "ac4", title: "Gold Member", desc: "Kumpulkan 500 poin", icon: Crown, unlocked: false },
+  { id: "ac5", title: "Datang 5 Minggu Berturut-turut", desc: "Konsistensi itu keren!", icon: Flame, unlocked: false },
 ];
 
 /* ================================================================== */

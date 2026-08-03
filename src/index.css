@@ -1280,3 +1280,196 @@
            the word to stretch exactly from the left edge to the right edge
            of the viewBox — this font-size mostly just sets the glyph height. */
       }
+
+      /* ================================================================== */
+      /* POIN & REWARDS PAGE — redesigned member dashboard                   */
+      /* ================================================================== */
+
+      .kc-rw-headrow { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:18px; }
+      .kc-rw-sub { color: var(--kc-ink-dim); font-size:13.5px; margin:6px 0 0; }
+      .kc-rw-head-actions { display:flex; gap:10px; flex-wrap:wrap; }
+
+      .kc-rw-layout { display:grid; grid-template-columns: 280px 1fr; gap:16px; align-items:start; }
+      @media (max-width: 980px) { .kc-rw-layout { grid-template-columns: 1fr; } }
+
+      .kc-rw-left { display:flex; flex-direction:column; gap:16px; position:sticky; top:86px; }
+      @media (max-width: 980px) { .kc-rw-left { position:static; } }
+
+      /* Membership card */
+      .kc-rw-membercard { position:relative; overflow:hidden; background: linear-gradient(155deg, var(--kc-ink) 0%, var(--kc-accent-dark) 100%); border-radius:18px; padding:18px; color:#fff; }
+      .kc-rw-membercard-watermark { position:absolute; top:-18px; right:-46px; color: rgba(255,255,255,0.07); pointer-events:none; }
+      .kc-rw-membercard-top { display:flex; align-items:center; gap:7px; font-size:11px; font-weight:800; letter-spacing:.6px; color: rgba(255,255,255,0.85); position:relative; z-index:1; }
+      .kc-rw-tier-pill { margin-left:2px; background: rgba(255,255,255,0.16); border:1px solid rgba(255,255,255,0.25); padding:2px 9px; border-radius:999px; font-size:9.5px; letter-spacing:.5px; }
+      .kc-rw-membercard-name { font-family:'Bebas Neue',sans-serif; font-size:19px; letter-spacing:.4px; margin-top:10px; position:relative; z-index:1; }
+      .kc-rw-membercard-points { font-family:'Bebas Neue',sans-serif; font-size:46px; line-height:1; margin-top:16px; position:relative; z-index:1; }
+      .kc-rw-membercard-points-label { font-size:10.5px; font-weight:700; letter-spacing:1.5px; color: rgba(255,255,255,0.6); margin-top:2px; position:relative; z-index:1; }
+      .kc-rw-membercard-track { position:relative; z-index:1; height:6px; border-radius:999px; background: rgba(255,255,255,0.16); margin-top:16px; overflow:hidden; }
+      .kc-rw-membercard-fill { height:100%; border-radius:999px; background: var(--kc-brass); }
+      .kc-rw-membercard-footrow { position:relative; z-index:1; display:flex; justify-content:space-between; align-items:flex-end; margin-top:10px; }
+      .kc-rw-membercard-tolabel { font-size:11.5px; color: rgba(255,255,255,0.85); }
+      .kc-rw-membercard-count { font-size:11px; color: rgba(255,255,255,0.55); margin-top:2px; }
+      .kc-rw-membercard-tierlabel { font-size:11px; font-weight:700; color: rgba(255,255,255,0.7); }
+      .kc-rw-qrbox { position:absolute; right:16px; bottom:16px; width:52px; height:52px; border-radius:12px; background:#fff; color: var(--kc-ink); display:flex; align-items:center; justify-content:center; z-index:1; }
+
+      /* Progress-to-gold card */
+      .kc-rw-goldcard { background: linear-gradient(160deg, var(--kc-ink) 0%, #0e2417 100%); border-radius:18px; padding:18px; color:#fff; }
+      .kc-rw-goldcard-head { display:flex; align-items:center; justify-content:space-between; font-size:11px; font-weight:800; letter-spacing:.8px; color: rgba(255,255,255,0.75); }
+      .kc-rw-goldcard-row { display:flex; justify-content:space-between; align-items:baseline; margin-top:14px; font-size:12.5px; color: rgba(255,255,255,0.7); }
+      .kc-rw-goldcard-num { font-family:'Bebas Neue',sans-serif; font-size:30px; color:#fff; margin-right:2px; }
+      .kc-rw-goldcard-pct { font-weight:800; color: var(--kc-brass); }
+      .kc-rw-goldcard-track { height:9px; border-radius:999px; background: rgba(255,255,255,0.14); margin-top:10px; overflow:hidden; }
+      .kc-rw-goldcard-fill { height:100%; border-radius:999px; background: linear-gradient(90deg, var(--kc-brass), #7ed19c); }
+      .kc-rw-goldcard-scale { display:flex; justify-content:space-between; font-size:10.5px; color: rgba(255,255,255,0.45); margin-top:6px; }
+      .kc-rw-goldcard-benefits-label { font-size:10.5px; font-weight:800; letter-spacing:.8px; color: rgba(255,255,255,0.6); margin-top:22px; }
+      .kc-rw-benefit-list { display:flex; flex-direction:column; gap:9px; margin-top:10px; }
+      .kc-rw-benefit-item { display:flex; align-items:center; gap:9px; font-size:12.5px; color: rgba(255,255,255,0.9); }
+      .kc-rw-benefit-item svg { color: var(--kc-brass); flex-shrink:0; background: rgba(63,169,104,0.18); border-radius:50%; padding:2px; box-sizing:content-box; }
+
+      .kc-rw-right { display:flex; flex-direction:column; gap:16px; min-width:0; }
+
+      /* Stat cards */
+      .kc-rw-stats { display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; }
+      @media (max-width: 760px) { .kc-rw-stats { grid-template-columns: 1fr 1fr; } }
+      .kc-rw-stat-card { background:#fff; border:1px solid var(--kc-line); border-radius:16px; padding:14px 16px; }
+      .kc-rw-stat-icon { width:32px; height:32px; border-radius:9px; background: var(--kc-accent); color:#fff; display:flex; align-items:center; justify-content:center; margin-bottom:10px; }
+      .kc-rw-stat-value { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:.3px; }
+      .kc-rw-stat-label { font-size:12.5px; font-weight:700; margin-top:2px; }
+      .kc-rw-stat-sub { font-size:11px; color: var(--kc-ink-dim); margin-top:2px; }
+
+      /* Content panels */
+      .kc-rw-content-grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; align-items:start; }
+      @media (max-width: 980px) { .kc-rw-content-grid { grid-template-columns: 1fr; } }
+      .kc-rw-content-col { display:flex; flex-direction:column; gap:16px; min-width:0; }
+      .kc-rw-panel { background:#fff; border:1px solid var(--kc-line); border-radius:16px; padding:16px; }
+      .kc-rw-panel-head { display:flex; align-items:center; justify-content:space-between; font-size:11px; font-weight:800; letter-spacing:.7px; color: var(--kc-ink-dim); margin-bottom:12px; }
+      .kc-rw-panel-head a { display:inline-flex; align-items:center; gap:2px; color: var(--kc-accent-dark); font-weight:800; cursor:pointer; letter-spacing:0; text-transform:none; font-size:12px; }
+
+      /* Tukar poin cards */
+      .kc-rw-redeem-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; }
+      @media (max-width: 620px) { .kc-rw-redeem-grid { grid-template-columns: 1fr; } }
+      .kc-rw-redeem-card { background: linear-gradient(160deg, var(--kc-ink), var(--kc-accent-dark)); border-radius:14px; padding:16px; color:#fff; display:flex; flex-direction:column; }
+      .kc-rw-redeem-icon { width:32px; height:32px; border-radius:9px; background: rgba(63,169,104,0.28); display:flex; align-items:center; justify-content:center; color: var(--kc-brass); }
+      .kc-rw-redeem-label { font-size:11.5px; color: rgba(255,255,255,0.7); margin-top:12px; }
+      .kc-rw-redeem-value { font-family:'Bebas Neue',sans-serif; font-size:22px; margin-top:2px; }
+      .kc-rw-redeem-pts { font-size:11px; font-weight:700; color: rgba(255,255,255,0.55); margin-top:2px; }
+      .kc-rw-redeem-btn { margin-top:14px; border:none; border-radius:999px; padding:10px 12px; font-size:12px; font-weight:800; background: var(--kc-brass); color: var(--kc-ink); cursor:pointer; transition: transform .12s, opacity .12s; }
+      .kc-rw-redeem-btn:hover:not(.disabled) { transform: translateY(-2px); }
+      .kc-rw-redeem-btn.disabled { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.55); cursor:not-allowed; }
+
+      /* Riwayat poin */
+      .kc-rw-history { display:flex; flex-direction:column; gap:8px; }
+      .kc-rw-history-row { display:flex; align-items:center; gap:10px; background: var(--kc-bg-soft); border-radius:12px; padding:10px 12px; }
+      .kc-rw-history-dot { width:34px; height:34px; border-radius:50%; background: rgba(63,169,104,0.16); color: var(--kc-accent-dark); font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .kc-rw-history-dot.neg { background: rgba(211,73,73,0.14); color:#B23A3A; }
+      .kc-rw-history-body { flex:1; min-width:0; }
+      .kc-rw-history-label { font-size:13px; font-weight:700; color: var(--kc-ink); }
+      .kc-rw-history-date { font-size:11px; color: var(--kc-ink-dim); margin-top:2px; }
+      .kc-rw-history-points { font-size:13px; font-weight:800; color: var(--kc-accent-dark); white-space:nowrap; }
+      .kc-rw-history-points.neg { color:#B23A3A; }
+
+      /* Voucher kamu */
+      .kc-rw-vouchers { display:flex; flex-direction:column; gap:8px; }
+      .kc-rw-voucher-row { display:flex; align-items:center; gap:10px; background: var(--kc-bg-soft); border-radius:12px; padding:10px 12px; }
+      .kc-rw-voucher-icon { color: var(--kc-accent-dark); flex-shrink:0; }
+      .kc-rw-voucher-body { flex:1; min-width:0; }
+      .kc-rw-voucher-value { font-size:13.5px; font-weight:800; color: var(--kc-ink); }
+      .kc-rw-voucher-expiry { font-size:11px; color: var(--kc-ink-dim); margin-top:2px; }
+      .kc-rw-voucher-use { flex-shrink:0; border:1.5px solid var(--kc-accent); color: var(--kc-accent-dark); background: transparent; border-radius:999px; padding:7px 14px; font-size:11.5px; font-weight:800; cursor:pointer; transition: background .12s; }
+      .kc-rw-voucher-use:hover { background: rgba(63,169,104,0.1); }
+      .kc-rw-empty { font-size:12.5px; color: var(--kc-ink-dim); background: var(--kc-bg-soft); border-radius:12px; padding:18px; text-align:center; }
+
+      /* Achievement */
+      .kc-rw-achievements { display:flex; flex-direction:column; gap:8px; }
+      .kc-rw-achievement-row { display:flex; align-items:center; gap:10px; background: var(--kc-bg-soft); border-radius:12px; padding:10px 12px; }
+      .kc-rw-achievement-row.locked { opacity:.55; }
+      .kc-rw-achievement-icon { width:34px; height:34px; border-radius:10px; background: rgba(63,169,104,0.16); color: var(--kc-accent-dark); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .kc-rw-achievement-row.locked .kc-rw-achievement-icon { background: rgba(23,40,31,0.08); color: var(--kc-ink-dim); }
+      .kc-rw-achievement-body { flex:1; min-width:0; }
+      .kc-rw-achievement-title { font-size:13px; font-weight:800; color: var(--kc-ink); }
+      .kc-rw-achievement-desc { font-size:11px; color: var(--kc-ink-dim); margin-top:2px; }
+      .kc-rw-achievement-status { flex-shrink:0; width:26px; height:26px; border-radius:50%; background: var(--kc-accent); color:#fff; display:flex; align-items:center; justify-content:center; }
+      .kc-rw-achievement-row.locked .kc-rw-achievement-status { background: rgba(23,40,31,0.08); color: var(--kc-ink-dim); }
+
+      /* Bottom banner + quick actions */
+      .kc-rw-bottom { display:grid; grid-template-columns: 1fr auto; gap:16px; margin-top:18px; align-items:stretch; }
+      @media (max-width: 900px) { .kc-rw-bottom { grid-template-columns: 1fr; } }
+      .kc-rw-bottom-banner { display:flex; align-items:center; gap:16px; background: linear-gradient(120deg, var(--kc-ink), var(--kc-accent-dark)); border-radius:18px; padding:20px 24px; color:#fff; flex-wrap:wrap; }
+      .kc-rw-bottom-giftbox { width:44px; height:44px; border-radius:12px; background: rgba(255,255,255,0.14); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .kc-rw-bottom-text { flex:1; min-width:200px; }
+      .kc-rw-bottom-title { font-size:15px; font-weight:800; }
+      .kc-rw-bottom-sub { font-size:12px; color: rgba(255,255,255,0.7); margin-top:3px; }
+      .kc-rw-bottom-cta { flex-shrink:0; }
+      .kc-rw-quickactions { display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; }
+      @media (max-width: 900px) { .kc-rw-quickactions { grid-template-columns: repeat(4, 1fr); } }
+      @media (max-width: 520px) { .kc-rw-quickactions { grid-template-columns: 1fr 1fr; } }
+      .kc-rw-quickaction { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; background:#fff; border:1px solid var(--kc-line); border-radius:16px; padding:14px 10px; font-size:11.5px; font-weight:700; color: var(--kc-ink); cursor:pointer; transition: transform .12s, border-color .12s; min-width:96px; }
+      .kc-rw-quickaction:hover { transform: translateY(-2px); border-color: var(--kc-accent); color: var(--kc-accent-dark); }
+
+      .kc-rw-footnote { text-align:center; font-size:12px; color: var(--kc-ink-dim); margin-top:18px; display:flex; align-items:center; justify-content:center; gap:5px; flex-wrap:wrap; }
+      .kc-rw-footnote b { color: var(--kc-accent-dark); }
+
+      /* ================================================================== */
+      /* RIWAYAT BOOKING PAGE                                                 */
+      /* ================================================================== */
+
+      .kc-rb-headrow { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:22px; }
+      .kc-rb-stats { display:flex; gap:0; background:#fff; border:1px solid var(--kc-line); border-radius:16px; overflow:hidden; }
+      @media (max-width: 860px) { .kc-rb-stats { flex-wrap:wrap; } }
+      .kc-rb-stat { display:flex; align-items:center; gap:10px; padding:14px 20px; border-right:1px solid var(--kc-line); }
+      .kc-rb-stat:last-child { border-right:none; }
+      .kc-rb-stat-icon { width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .kc-rb-stat-icon.tone-green { background: rgba(63,169,104,0.16); color: var(--kc-accent-dark); }
+      .kc-rb-stat-icon.tone-red { background: rgba(211,73,73,0.14); color:#B23A3A; }
+      .kc-rb-stat-value { font-family:'Bebas Neue',sans-serif; font-size:19px; line-height:1; }
+      .kc-rb-stat-label { font-size:11.5px; font-weight:700; color: var(--kc-ink); margin-top:3px; white-space:nowrap; }
+      .kc-rb-stat-sub { font-size:10.5px; color: var(--kc-ink-dim); margin-top:1px; white-space:nowrap; }
+
+      .kc-rb-layout { display:grid; grid-template-columns: 1fr 320px; gap:18px; align-items:start; }
+      @media (max-width: 980px) { .kc-rb-layout { grid-template-columns: 1fr; } }
+      .kc-rb-main { min-width:0; }
+
+      .kc-rb-toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+      .kc-rb-tabs { display:flex; gap:4px; background: var(--kc-bg-soft); border:1px solid var(--kc-line); border-radius:999px; padding:4px; }
+      .kc-rb-tab { display:flex; align-items:center; gap:6px; border:none; background:transparent; color: var(--kc-ink-dim); font-size:12.5px; font-weight:700; padding:8px 14px; border-radius:999px; cursor:pointer; transition: background .12s, color .12s; }
+      .kc-rb-tab.active { background: var(--kc-accent-dark); color:#fff; }
+      .kc-rb-tab:not(.active):hover { color: var(--kc-ink); }
+      .kc-rb-yearselect { position:relative; display:flex; align-items:center; gap:6px; border:1px solid var(--kc-line); border-radius:10px; padding:8px 12px; background:#fff; }
+      .kc-rb-yearselect select { appearance:none; border:none; background:transparent; font-size:12.5px; font-weight:600; color: var(--kc-ink); outline:none; cursor:pointer; padding-right:4px; }
+      .kc-rb-yearselect svg { color: var(--kc-ink-dim); pointer-events:none; flex-shrink:0; }
+      .kc-rb-yearselect-sm { padding:5px 9px; border-radius:8px; }
+      .kc-rb-yearselect-sm select { font-size:11.5px; }
+
+      .kc-rb-list { display:flex; flex-direction:column; gap:10px; }
+      .kc-rb-row { display:flex; align-items:center; gap:14px; background:#fff; border:1px solid var(--kc-line); border-radius:14px; padding:14px 16px; transition: border-color .12s; }
+      .kc-rb-row:hover { border-color: var(--kc-accent); }
+      .kc-rb-row-icon { width:44px; height:44px; border-radius:12px; background: var(--kc-bg-soft); color: var(--kc-accent-dark); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .kc-rb-row-main { flex:1; min-width:0; }
+      .kc-rb-row-title { font-size:14px; font-weight:800; color: var(--kc-ink); }
+      .kc-rb-row-meta { display:flex; align-items:center; gap:2px; font-size:11.5px; color: var(--kc-ink-dim); margin-top:4px; flex-wrap:wrap; }
+      .kc-rb-row-meta svg { flex-shrink:0; vertical-align:-1px; }
+      .kc-rb-row-side { text-align:right; flex-shrink:0; }
+      .kc-rb-row-price { font-size:14px; font-weight:800; color: var(--kc-ink); }
+      .kc-rb-row-chevron { color: var(--kc-ink-dim); flex-shrink:0; }
+
+      .kc-rb-side { display:flex; flex-direction:column; gap:16px; }
+      .kc-rb-next-card { background: var(--kc-bg-soft); border-radius:16px; padding:20px; }
+      .kc-rb-next-icon { width:42px; height:42px; border-radius:12px; background:#fff; color: var(--kc-accent-dark); display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+      .kc-rb-next-title { font-size:14px; font-weight:800; color: var(--kc-accent-dark); }
+      .kc-rb-next-desc { font-size:12px; color: var(--kc-ink-dim); margin:6px 0 14px; line-height:1.5; }
+
+      .kc-rb-summary-card { background:#fff; border:1px solid var(--kc-line); border-radius:16px; padding:18px; }
+      .kc-rb-summary-head { display:flex; align-items:center; justify-content:space-between; font-size:13.5px; font-weight:800; color: var(--kc-ink); margin-bottom:14px; }
+      .kc-rb-summary-row { display:flex; justify-content:space-between; align-items:center; font-size:12.5px; color: var(--kc-ink-dim); padding:9px 0; border-bottom:1px solid var(--kc-line); }
+      .kc-rb-summary-row:last-of-type { border-bottom:none; }
+      .kc-rb-summary-row b { font-size:13px; color: var(--kc-ink); font-weight:800; }
+      .kc-rb-summary-row b.accent { color: var(--kc-accent-dark); }
+      .kc-rb-hemat-pill { width:100%; display:flex; align-items:center; gap:8px; background: rgba(63,169,104,0.1); border:none; border-radius:12px; padding:12px 14px; font-size:12px; font-weight:700; color: var(--kc-accent-dark); margin-top:12px; cursor:pointer; text-align:left; transition: background .12s; }
+      .kc-rb-hemat-pill:hover { background: rgba(63,169,104,0.18); }
+      .kc-rb-hemat-pill svg:last-child { margin-left:auto; flex-shrink:0; }
+
+      .kc-rb-help-card { display:flex; align-items:center; justify-content:space-between; gap:14px; background:#fff; border:1px solid var(--kc-line); border-radius:16px; padding:18px; }
+      .kc-rb-help-title { font-size:13.5px; font-weight:800; color: var(--kc-ink); }
+      .kc-rb-help-desc { font-size:11.5px; color: var(--kc-ink-dim); margin:3px 0 10px; }
+      .kc-rb-whatsapp-btn { display:inline-flex; align-items:center; gap:6px; border:1.5px solid var(--kc-accent); color: var(--kc-accent-dark); background: transparent; border-radius:999px; padding:8px 13px; font-size:12px; font-weight:700; cursor:pointer; transition: background .12s; }
+      .kc-rb-whatsapp-btn:hover { background: rgba(63,169,104,0.08); }
+      .kc-rb-help-avatar { width:52px; height:52px; border-radius:50%; background: rgba(63,169,104,0.16); color: var(--kc-accent-dark); display:flex; align-items:center; justify-content:center; flex-shrink:0; }

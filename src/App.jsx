@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { AuthGate } from "./components/AuthGate";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Navbar";
-import { SERVICES } from "./data/barbershop";
+import { REDEEMABLE_VOUCHERS, SERVICES } from "./data/barbershop";
 import { BookingSuccessTicket, DateTimeStep, JourneyTimeline, PaymentFailed, PaymentStep, PaymentSuccess, PointRewardScreen, ProcessingStep, ReviewScreen, ServiceStep, VoucherStep } from "./pages/BookingFlow";
 import { CapsterDetail } from "./pages/CapsterDetail";
 import { CapstersPage } from "./pages/CapstersPage";
@@ -29,7 +29,7 @@ export default function App() {
   const [appliedVoucher, setAppliedVoucher] = useState(null);
   const [method, setMethod] = useState(null);
   const [points, setPoints] = useState(320);
-  const [wallet, setWallet] = useState([]);
+  const [wallet, setWallet] = useState(() => Array.from({ length: 5 }, () => REDEEMABLE_VOUCHERS[0]));
   const [lastTotal, setLastTotal] = useState(0);
   const [earnedPoints, setEarnedPoints] = useState(0);
 
@@ -94,7 +94,7 @@ export default function App() {
       {stage === "journey" && <JourneyTimeline onFinishToReward={finishJourneyToReward} />}
       {stage === "reward" && <PointRewardScreen earned={earnedPoints} onNext={() => go("review")} />}
       {stage === "review" && capster && <ReviewScreen capster={capster} onSubmit={backToHomeFresh} />}
-      {stage === "points" && <PointsPage points={points} wallet={wallet} setWallet={setWallet} setPoints={setPoints} userName={userName} />}
+      {stage === "points" && <PointsPage points={points} wallet={wallet} setWallet={setWallet} setPoints={setPoints} userName={userName} go={go} />}
       {stage === "profile" && <ProfilePage userName={userName} points={points} branch={branch} go={go} />}
       {stage === "history" && <HistoryPage go={go} />}
 
