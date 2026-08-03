@@ -13,10 +13,18 @@ export function Footer({ go }) {
       <div className="kc-footer-inner">
         <div className="kc-footer-top">
           <div className="kc-footer-brand-col">
-            <div className="kc-logo kc-logo-onDark">
-              <span className="kc-logo-mark"><Scissors size={17} strokeWidth={2.4} /></span>
-              CARTENZ<span className="kc-logo-dot">.BARBER</span>
-            </div>
+          <button className="kc-logo" onClick={() => go("home")}>
+    <img
+        src="/logo.png"
+        alt="Logo"
+        className="kc-logo-image"
+    />
+
+<div className="kc-logo-mark">
+        <span className="kc-logo-main" style={{ color: "#fff" }}>CARTENZ BARBERSHOP</span>
+
+    </div>
+</button>
             <p className="kc-footer-tagline">
               Cartenz merawat gaya dan kepercayaan diri lebih dari 13.800 pelanggan lewat capster
               bersertifikat di 5 cabang.

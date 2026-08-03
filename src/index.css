@@ -264,7 +264,7 @@
       .kc-section.kc-section-tight { padding-top: 30px; padding-bottom: 30px; }
       .kc-section-head { margin-bottom: 22px; }
       .kc-kicker { font-size: 11.5px; font-weight:800; letter-spacing: 1px; text-transform:uppercase; color: var(--kc-accent-dark); }
-      .kc-h2 { font-family:'Anton',sans-serif; font-size: 28px; letter-spacing:.3px; margin: 6px 0 0; }
+      .kc-h2 { font-family:'Bebas Neue',sans-serif; font-size: 28px; letter-spacing:.3px; margin: 6px 0 0; }
 
       .kc-quick-grid { display:grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
       @media (max-width: 800px) { .kc-quick-grid { grid-template-columns: repeat(2,1fr); } }
