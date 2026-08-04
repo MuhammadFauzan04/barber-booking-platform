@@ -3,23 +3,30 @@
    convention). */
 
 import React, { useState, useEffect, useRef } from "react";
-import { Bell, ChevronDown, Gift, History, LogOut, Menu, Scissors, User, UserCircle, X } from "lucide-react";
+import { Bell, ChevronDown, Gift, History, LogOut, MapPin, Menu, Scissors, User, UserCircle, X } from "lucide-react";
 import { PromoBar } from "./PromoBar";
 import { NotificationPanel } from "./NotificationCenter";
-import { BRANCHES, NAV_ITEMS, NOTIFICATIONS } from "../data/barbershop";
+import { BRANCHES, GOLD_TIER_TARGET, NAV_ITEMS, NOTIFICATIONS } from "../data/barbershop";
 
 const NOTIF_TARGET_TIME = Date.now() + (1 * 3600 + 43 * 60 + 15) * 1000;
 
 export function Header({ stage, go, branch, setBranch, points, menuOpen, setMenuOpen, userName, onLogout }) {
   const [profileOpen, setProfileOpen] = useState(false);
+  const [branchOpen, setBranchOpen] = useState(false);
   const [notifItems, setNotifItems] = useState(NOTIFICATIONS);
   const [notifTab, setNotifTab] = useState("semua");
   const profileRef = useRef(null);
+  const branchRef = useRef(null);
   const unreadCount = notifItems.filter((n) => n.unread).length;
+
+  const activeBranch = BRANCHES.find((b) => b.id === branch) || BRANCHES[0];
+  const tier = points >= GOLD_TIER_TARGET ? "Gold" : "Silver";
+  const initials = (userName || "Tamu").trim().split(/\s+/).map((n) => n[0]).join("").slice(0, 2).toUpperCase();
 
   useEffect(() => {
     const onDocClick = (e) => {
       if (profileRef.current && !profileRef.current.contains(e.target)) setProfileOpen(false);
+      if (branchRef.current && !branchRef.current.contains(e.target)) setBranchOpen(false);
     };
     document.addEventListener("mousedown", onDocClick);
     return () => document.removeEventListener("mousedown", onDocClick);
@@ -37,35 +44,74 @@ export function Header({ stage, go, branch, setBranch, points, menuOpen, setMenu
     />
 
 <div className="kc-logo-text">
-        <span className="kc-logo-main">CARTENZ BARBERSHOP</span>
+        <span className="kc-logo-main">CARTENZ</span>
 
     </div>
 </button>
 
         <nav className="kc-nav-desktop">
-          {NAV_ITEMS.map((it) => (
-            <button
-              key={it.id}
-              className={"kc-nav-link" + (stage === it.id || (stage === "capsterDetail" && it.id === "capsters") ? " active" : "")}
-              onClick={() => go(it.id)}
-            >
-              {it.label}
-            </button>
-          ))}
+          {NAV_ITEMS.map((it) => {
+            const Icon = it.icon;
+            const isActive = stage === it.id || (stage === "capsterDetail" && it.id === "capsters");
+            return (
+              <button
+                key={it.id}
+                className={"kc-nav-link" + (isActive ? " active" : "")}
+                onClick={() => go(it.id)}
+              >
+                {Icon && <Icon size={16} />}
+                {it.label}
+              </button>
+            );
+          })}
         </nav>
 
         <div className="kc-header-right">
-          <select className="kc-branch-select" value={branch} onChange={(e) => setBranch(e.target.value)} aria-label="Pilih cabang">
-            {BRANCHES.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
-          </select>
+          <div className="kc-branch-menu" ref={branchRef}>
+            <button className="kc-branch-chip" onClick={() => setBranchOpen((v) => !v)}>
+              <span className="kc-branch-chip-icon"><MapPin size={16} /></span>
+              <span className="kc-branch-chip-text">
+                <span className="kc-branch-chip-name">{activeBranch.name}</span>
+                <span className="kc-branch-chip-city">{activeBranch.city}</span>
+              </span>
+              <ChevronDown size={14} className={"kc-user-chip-caret" + (branchOpen ? " open" : "")} />
+            </button>
+            {branchOpen && (
+              <div className="kc-branch-dropdown">
+                {BRANCHES.map((b) => (
+                  <button
+                    key={b.id}
+                    className={"kc-branch-option" + (b.id === branch ? " active" : "")}
+                    onClick={() => { setBranch(b.id); setBranchOpen(false); }}
+                  >
+                    <span className="kc-branch-option-name">{b.name}</span>
+                    <span className="kc-branch-option-city">{b.city}</span>
+                    {b.isNew && <span className="kc-branch-option-new">Baru</span>}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
           <button className="kc-points-chip" onClick={() => go("points")}>
-            <Gift size={13} /> {points} pts
+            <span className="kc-points-chip-icon"><Gift size={16} /></span>
+            <span className="kc-points-chip-text">
+              <span className="kc-points-chip-num">{points} pts</span>
+              <span className="kc-points-chip-tier">{tier} Member</span>
+            </span>
           </button>
+
           <div className="kc-user-menu" ref={profileRef}>
             <button className="kc-user-chip" onClick={() => setProfileOpen((v) => !v)}>
-              <User size={14} /> {userName || "Tamu"}
-              {unreadCount > 0 && <span className="kc-user-chip-dot" />}
-              <ChevronDown size={12} className={"kc-user-chip-caret" + (profileOpen ? " open" : "")} />
+              <span className="kc-user-chip-avatar">
+                {initials || <User size={14} />}
+                {unreadCount > 0 && <span className="kc-user-chip-dot" />}
+              </span>
+              <span className="kc-user-chip-text">
+                <span className="kc-user-chip-name">{userName || "Tamu"}</span>
+                <span className="kc-user-chip-tier">{tier} Member</span>
+              </span>
+              <ChevronDown size={14} className={"kc-user-chip-caret" + (profileOpen ? " open" : "")} />
             </button>
             {profileOpen && (
               <NotificationPanel
@@ -90,12 +136,22 @@ export function Header({ stage, go, branch, setBranch, points, menuOpen, setMenu
 
       {menuOpen && (
         <div className="kc-nav-mobile">
-          {NAV_ITEMS.map((it) => (
-            <button key={it.id} className={"kc-nav-link" + (stage === it.id ? " active" : "")}
-              onClick={() => { go(it.id); setMenuOpen(false); }}>
-              {it.label}
-            </button>
-          ))}
+          <div className="kc-branch-chip kc-branch-chip-mobile">
+            <span className="kc-branch-chip-icon"><MapPin size={16} /></span>
+            <span className="kc-branch-chip-text">
+              <span className="kc-branch-chip-name">{activeBranch.name}</span>
+              <span className="kc-branch-chip-city">{activeBranch.city}</span>
+            </span>
+          </div>
+          {NAV_ITEMS.map((it) => {
+            const Icon = it.icon;
+            return (
+              <button key={it.id} className={"kc-nav-link" + (stage === it.id ? " active" : "")}
+                onClick={() => { go(it.id); setMenuOpen(false); }}>
+                {Icon && <Icon size={15} />} {it.label}
+              </button>
+            );
+          })}
           <div className="kc-nav-mobile-divider" />
           <button className="kc-nav-link" onClick={() => { setMenuOpen(false); setProfileOpen(true); }}>
             <Bell size={15} /> Notifikasi {unreadCount > 0 && <span className="kc-user-chip-dot" style={{ position: "static", marginLeft: 4 }} />}

@@ -27,7 +27,7 @@ export function PointsPage({ points, wallet, setWallet, setPoints, userName, go 
   ];
 
   return (
-    <Page className="kc-section kc-rw">
+    <Page className="kc-section kc-section-tight kc-rw">
       <div className="kc-rw-headrow">
         <div>
           <span className="kc-kicker">Poin & Rewards</span>
@@ -85,9 +85,9 @@ export function PointsPage({ points, wallet, setWallet, setPoints, userName, go 
           </div>
         </div>
 
-        {/* RIGHT COLUMN — stats + content */}
+        {/* RIGHT COLUMN — stats + redeem panel only (kept close in height to the left card stack) */}
         <div className="kc-rw-right">
-          <div className="kc-rw-stats">
+          <div className="kc-rw-stats kc-rw-stats-2x2">
             {stats.map((s) => (
               <div className="kc-rw-stat-card" key={s.label}>
                 <div className="kc-rw-stat-icon"><s.icon size={18} /></div>
@@ -98,91 +98,88 @@ export function PointsPage({ points, wallet, setWallet, setPoints, userName, go 
             ))}
           </div>
 
-          <div className="kc-rw-content-grid">
-            <div className="kc-rw-content-col">
-              <div className="kc-rw-panel">
-                <div className="kc-rw-panel-head"><span>TUKAR POIN JADI VOUCHER</span><a onClick={() => {}}>Lihat Semua <ChevronRight size={13} /></a></div>
-                <div className="kc-rw-redeem-grid">
-                  <Stagger>
-                    {REDEEMABLE_VOUCHERS.map((v) => (
-                      <div className="kc-rw-redeem-card" key={v.id}>
-                        <div className="kc-rw-redeem-icon"><Gift size={16} /></div>
-                        <div className="kc-rw-redeem-label">Voucher</div>
-                        <div className="kc-rw-redeem-value">{rp(v.value)}</div>
-                        <div className="kc-rw-redeem-pts">{v.points} POIN</div>
-                        <button
-                          className={"kc-rw-redeem-btn" + (points < v.points ? " disabled" : "")}
-                          disabled={points < v.points}
-                          onClick={() => redeem(v)}
-                        >
-                          {points < v.points ? "Poin Kurang" : "Tukar Sekarang"}
-                        </button>
-                      </div>
-                    ))}
-                  </Stagger>
-                </div>
-              </div>
-
-              <div className="kc-rw-panel">
-                <div className="kc-rw-panel-head"><span>RIWAYAT POIN</span><a onClick={() => {}}>Lihat Semua <ChevronRight size={13} /></a></div>
-                <div className="kc-rw-history">
-                  <Stagger>
-                    {POINT_HISTORY.map((h) => (
-                      <div className="kc-rw-history-row" key={h.id}>
-                        <div className={"kc-rw-history-dot" + (h.points < 0 ? " neg" : "")}>{h.points > 0 ? `+${h.points}` : h.points}</div>
-                        <div className="kc-rw-history-body">
-                          <div className="kc-rw-history-label">{h.label}</div>
-                          <div className="kc-rw-history-date">{h.date}</div>
-                        </div>
-                        <div className={"kc-rw-history-points" + (h.points < 0 ? " neg" : "")}>{h.points > 0 ? `+${h.points} Poin` : `${h.points} Poin`}</div>
-                      </div>
-                    ))}
-                  </Stagger>
-                </div>
-              </div>
-            </div>
-
-            <div className="kc-rw-content-col">
-              <div className="kc-rw-panel">
-                <div className="kc-rw-panel-head"><span>VOUCHER KAMU</span><a onClick={() => {}}>Lihat Semua <ChevronRight size={13} /></a></div>
-                {wallet.length === 0 ? (
-                  <div className="kc-rw-empty">Belum ada voucher. Tukar poin kamu untuk mendapatkan voucher.</div>
-                ) : (
-                  <div className="kc-rw-vouchers">
-                    <Stagger>
-                      {wallet.slice(0, 3).map((v, i) => (
-                        <div className="kc-rw-voucher-row" key={i}>
-                          <Ticket size={17} className="kc-rw-voucher-icon" />
-                          <div className="kc-rw-voucher-body">
-                            <div className="kc-rw-voucher-value">{rp(v.value)}</div>
-                            <div className="kc-rw-voucher-expiry">Berlaku s/d 31 Ags 2026</div>
-                          </div>
-                          <button className="kc-rw-voucher-use" onClick={() => go && go("services")}>Gunakan</button>
-                        </div>
-                      ))}
-                    </Stagger>
+          <div className="kc-rw-panel">
+            <div className="kc-rw-panel-head"><span>TUKAR POIN JADI VOUCHER</span><a onClick={() => {}}>Lihat Semua <ChevronRight size={13} /></a></div>
+            <div className="kc-rw-redeem-grid">
+              <Stagger>
+                {REDEEMABLE_VOUCHERS.map((v) => (
+                  <div className="kc-rw-redeem-card" key={v.id}>
+                    <div className="kc-rw-redeem-icon"><Gift size={16} /></div>
+                    <div className="kc-rw-redeem-label">Voucher</div>
+                    <div className="kc-rw-redeem-value">{rp(v.value)}</div>
+                    <div className="kc-rw-redeem-pts">{v.points} POIN</div>
+                    <button
+                      className={"kc-rw-redeem-btn" + (points < v.points ? " disabled" : "")}
+                      disabled={points < v.points}
+                      onClick={() => redeem(v)}
+                    >
+                      {points < v.points ? "Poin Kurang" : "Tukar Sekarang"}
+                    </button>
                   </div>
-                )}
-              </div>
-
-              <div className="kc-rw-panel">
-                <div className="kc-rw-panel-head"><span>ACHIEVEMENT</span><a onClick={() => {}}>Lihat Semua <ChevronRight size={13} /></a></div>
-                <div className="kc-rw-achievements">
-                  <Stagger>
-                    {ACHIEVEMENTS.map((a) => (
-                      <div className={"kc-rw-achievement-row" + (a.unlocked ? "" : " locked")} key={a.id}>
-                        <div className="kc-rw-achievement-icon"><a.icon size={16} /></div>
-                        <div className="kc-rw-achievement-body">
-                          <div className="kc-rw-achievement-title">{a.title}</div>
-                          <div className="kc-rw-achievement-desc">{a.desc}</div>
-                        </div>
-                        <div className="kc-rw-achievement-status">{a.unlocked ? <Check size={16} /> : <Lock size={14} />}</div>
-                      </div>
-                    ))}
-                  </Stagger>
-                </div>
-              </div>
+                ))}
+              </Stagger>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* FULL-WIDTH DENSE ROW — history, vouchers, achievements sit side by side instead of stacking under the sidebar */}
+      <div className="kc-rw-panels">
+        <div className="kc-rw-panel">
+          <div className="kc-rw-panel-head"><span>RIWAYAT POIN</span><a onClick={() => {}}>Lihat Semua <ChevronRight size={13} /></a></div>
+          <div className="kc-rw-history">
+            <Stagger>
+              {POINT_HISTORY.map((h) => (
+                <div className="kc-rw-history-row" key={h.id}>
+                  <div className={"kc-rw-history-dot" + (h.points < 0 ? " neg" : "")}>{h.points > 0 ? `+${h.points}` : h.points}</div>
+                  <div className="kc-rw-history-body">
+                    <div className="kc-rw-history-label">{h.label}</div>
+                    <div className="kc-rw-history-date">{h.date}</div>
+                  </div>
+                  <div className={"kc-rw-history-points" + (h.points < 0 ? " neg" : "")}>{h.points > 0 ? `+${h.points} Poin` : `${h.points} Poin`}</div>
+                </div>
+              ))}
+            </Stagger>
+          </div>
+        </div>
+
+        <div className="kc-rw-panel">
+          <div className="kc-rw-panel-head"><span>VOUCHER KAMU</span><a onClick={() => {}}>Lihat Semua <ChevronRight size={13} /></a></div>
+          {wallet.length === 0 ? (
+            <div className="kc-rw-empty">Belum ada voucher. Tukar poin kamu untuk mendapatkan voucher.</div>
+          ) : (
+            <div className="kc-rw-vouchers">
+              <Stagger>
+                {wallet.slice(0, 3).map((v, i) => (
+                  <div className="kc-rw-voucher-row" key={i}>
+                    <Ticket size={17} className="kc-rw-voucher-icon" />
+                    <div className="kc-rw-voucher-body">
+                      <div className="kc-rw-voucher-value">{rp(v.value)}</div>
+                      <div className="kc-rw-voucher-expiry">Berlaku s/d 31 Ags 2026</div>
+                    </div>
+                    <button className="kc-rw-voucher-use" onClick={() => go && go("services")}>Gunakan</button>
+                  </div>
+                ))}
+              </Stagger>
+            </div>
+          )}
+        </div>
+
+        <div className="kc-rw-panel">
+          <div className="kc-rw-panel-head"><span>ACHIEVEMENT</span><a onClick={() => {}}>Lihat Semua <ChevronRight size={13} /></a></div>
+          <div className="kc-rw-achievements">
+            <Stagger>
+              {ACHIEVEMENTS.map((a) => (
+                <div className={"kc-rw-achievement-row" + (a.unlocked ? "" : " locked")} key={a.id}>
+                  <div className="kc-rw-achievement-icon"><a.icon size={16} /></div>
+                  <div className="kc-rw-achievement-body">
+                    <div className="kc-rw-achievement-title">{a.title}</div>
+                    <div className="kc-rw-achievement-desc">{a.desc}</div>
+                  </div>
+                  <div className="kc-rw-achievement-status">{a.unlocked ? <Check size={16} /> : <Lock size={14} />}</div>
+                </div>
+              ))}
+            </Stagger>
           </div>
         </div>
       </div>

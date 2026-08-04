@@ -1,14 +1,13 @@
 /* Mock data for the Cartenz Barbershop demo — branches, capsters,
    services, testimonials, FAQs, and every small constant the UI needs. */
 
-import { ArrowRight, BadgeCheck, Banknote, Bell, Brain, Calendar, CalendarCheck, Check, Clock, CreditCard, Crown, Droplet, ExternalLink, Flame, Gift, Hand, Lightbulb, MapPinned, QrCode, Scissors, Smartphone, Sparkles, Star, Tag, Ticket, Timer, Wallet, Waves, Wind } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, Bell, Brain, Calendar, CalendarCheck, Check, Clock, CreditCard, Crown, Droplet, ExternalLink, Flame, Gift, Hand, Home, Lightbulb, MapPinned, QrCode, Scissors, Smartphone, Sparkles, Star, Tag, Ticket, Timer, User, Wallet, Waves, Wind } from "lucide-react";
 
 export const BRANCHES = [
-  { id: "kmg", name: "Kemang", city: "Jakarta Selatan" },
-  { id: "kby", name: "Kebayoran Baru", city: "Jakarta Selatan" },
-  { id: "dago", name: "Dago", city: "Bandung" },
-  { id: "drm", name: "Darmo", city: "Surabaya" },
-  { id: "cpi", name: "Centre Point", city: "Makassar", isNew: true },
+  { id: "kmg", name: "Cartenz Perints", city: "Makassar" },
+  { id: "kby", name: "Cartenz Bau Mangga", city: "Makassar" },
+  { id: "dago", name: "CartenzSinga", city: "Makassar" },
+  { id: "cpi", name: "Cartenz CPI", city: "Makassar", isNew: true },
 ];
 
 export const CAPSTERS = [
@@ -103,6 +102,7 @@ export const FEATURED_PROMOS = [
     note: "Maks. potongan Rp 30.000",
     code: "NEWMEMBER10",
     expiry: "Berlaku sampai 31 Agu 2026",
+    image: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?fm=jpg&q=70&w=700&auto=format&fit=crop",
   },
   {
     id: "fp2",
@@ -115,6 +115,7 @@ export const FEATURED_PROMOS = [
     desc: "Kumpulkan 5 booking dan creambath berikutnya gratis.",
     code: "LOYAL5",
     expiry: "Program berjalan terus",
+    image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?fm=jpg&q=70&w=700&auto=format&fit=crop",
   },
 ];
 
@@ -240,11 +241,11 @@ export const HERO_GALLERY_DOWN = [
 
 
 export const NAV_ITEMS = [
-  { id: "home", label: "Beranda" },
-  { id: "services", label: "Layanan" },
-  { id: "capsters", label: "Capster" },
-  { id: "promo", label: "Promo" },
-  { id: "inspiration", label: "Inspirasi" },
+  { id: "home", label: "Beranda", icon: Home },
+  { id: "services", label: "Layanan", icon: Scissors },
+  { id: "capsters", label: "Capster", icon: User },
+  { id: "promo", label: "Promo", icon: Gift },
+  { id: "inspiration", label: "Inspirasi", icon: Lightbulb },
 ];
 
 export const MIRROR_STEPS = [

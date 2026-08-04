@@ -5,8 +5,8 @@
 import React from "react";
 import {
   ArrowRight, BadgeCheck, Cake, Calendar, CalendarCheck, CalendarPlus,
-  ChevronRight, Crown, Gift, Mail, MapPin, Pencil, Phone, Sparkles,
-  Star, Ticket, UserPlus, Wallet,
+  CalendarDays, ChevronRight, Crown, Gift, Mail, MapPin, Pencil, Phone,
+  Sparkles, Star, Ticket, UserPlus, Wallet,
 } from "lucide-react";
 import { Page, Reveal, Stagger } from "../components/Common";
 import { BOOKING_HISTORY, BRANCHES } from "../data/barbershop";
@@ -30,7 +30,7 @@ export function ProfilePage({ userName, points, branch, go }) {
   const email = userName ? userName.toLowerCase().replace(/\s+/g, ".") + "@gmail.com" : "-";
 
   return (
-    <Page className="kc-section">
+    <Page className="kc-section kc-section-tight">
       <div className="kc-section-head">
         <span className="kc-kicker">Akun Saya</span>
         <h2 className="kc-h2">PROFIL KAMU 👋</h2>
@@ -133,6 +133,13 @@ export function ProfilePage({ userName, points, branch, go }) {
                 <div className="kc-pf-detail-value">12 Mei 2000</div>
               </div>
             </div>
+            <div className="kc-pf-detail-row">
+              <div className="kc-pf-detail-icon"><CalendarDays size={16} /></div>
+              <div>
+                <div className="kc-pf-detail-label">Bergabung Sejak</div>
+                <div className="kc-pf-detail-value">Januari 2025</div>
+              </div>
+            </div>
           </Stagger>
         </div>
 
@@ -193,7 +200,7 @@ export function ProfilePage({ userName, points, branch, go }) {
       </div>
 
       {/* QUICK ACTIONS */}
-      <div className="kc-kicker" style={{ margin: "30px 0 4px" }}>Aksi Cepat</div>
+      <div className="kc-kicker" style={{ margin: "22px 0 4px" }}>Aksi Cepat</div>
       <div className="kc-pf-quick-row">
         <button className="kc-pf-quick-card" onClick={() => go("history")}>
           <span className="kc-pf-quick-left">
