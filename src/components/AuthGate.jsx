@@ -17,18 +17,10 @@ export function AuthGate({ onEnter }) {
       <div className="kc-auth-shell">
         {/* ---------- LEFT: the form, plain white ---------- */}
         <div className="kc-auth-left">
-        <div className="kc-logo">
-    <img
-        src="/logo.png"
-        alt="Logo"
-        className="kc-logo-image"
-    />
-
-<div className="kc-logo-text">
-        <span className="kc-logo-main">CARTENZ BARBERSHOP</span>
-
-    </div>
-</div>
+        <div className="kc-logo-login">
+            <img  src="/logo.png" alt="Logo"className="kc-logo-image"/>
+            <div className="kc-logo-text"> <span className="kc-logo-main">CARTENZ BARBERSHOP</span> </div>
+          </div>
 
           <span className="kc-auth-kicker">{mode === "register" ? "Mulai Gratis" : "Selamat Datang Kembali"}</span>
           <h1 className="kc-auth-h1">{mode === "register" ? "Buat Akun Baru" : "Masuk ke Akunmu"}</h1>
@@ -111,7 +103,7 @@ export function AuthGate({ onEnter }) {
 
             <div className="kc-auth-float-card">
               <div className="kc-auth-float-top">
-                <span className="kc-auth-float-logo"><img src="/logo.png" alt="Logo" className="kc-logo-image" /></span>
+                <span className="kc-auth-float-logo">  <img  src="/logo.png" alt="Logo"className="kc-logo-image"/></span>
                 <span className="kc-auth-float-badge"><span className="kc-auth-float-dot" /> Aktif</span>
               </div>
               <div className="kc-auth-float-title">Cartenz Barbershop</div>

@@ -68,14 +68,24 @@
     
     .kc-logo-main{
         font-family:'inter', sans-serif;
-        font-size:16px;
+        font-size:18px;
         line-height:1;
         color:#222;
         letter-spacing:0.5px;
     }
+
+    .kc-logo-login{
+        display:flex;
+        align-items:center;
+        gap:4px;
+        background:none;
+        border:none;
+        margin-left: -16px;
+        margin-bottom: 4px;
+    }
     
-      .kc-nav-desktop { display:flex; gap:8px; }
-      .kc-nav-link { display:flex; align-items:center; gap:px; background:none; border:none; color: var(--kc-ink-dim); padding:9px 16px; border-radius:999px; font-size:13.5px; font-weight:600; transition: all .15s; white-space:nowrap; }
+      .kc-nav-desktop { display:flex; gap:4px; }
+      .kc-nav-link { display:flex; align-items:center; gap:6px; background:none; border:none; color: var(--kc-ink-dim); padding:9px 16px; border-radius:999px; font-size:13.5px; font-weight:600; transition: all .15s; white-space:nowrap; }
       .kc-nav-link.active { color: var(--kc-accent-dark); background: var(--kc-bg-soft); }
       .kc-nav-link:hover:not(.active) { color: var(--kc-ink); background: rgba(23,40,31,0.05); }
       .kc-header-right { display:flex; align-items:center; gap:10px; }
@@ -811,10 +821,10 @@
 
       /* INSPIRATION PAGE — header, search bar, category pills */
       .kc-insp-top { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; flex-wrap:wrap; }
-      .kc-insp-search-row { display:flex; gap:10px; flex-shrink:0;  }
-      .kc-insp-search { display:flex; align-items:center; gap:8px; background: #fff; border:1px solid var(--kc-line); border-radius:10px; padding: 0 14px; min-width: 340px; color: var(--kc-ink-dim); }
+      .kc-insp-search-row { display:flex; gap:10px; flex-shrink:0; }
+      .kc-insp-search { display:flex; align-items:center; gap:8px; background: var(--kc-bg-soft); border:1px solid var(--kc-line); border-radius:10px; padding: 0 14px; min-width: 340px; color: var(--kc-ink-dim); }
       @media (max-width: 700px) { .kc-insp-search { min-width: 0; flex:1; } }
-      .kc-insp-search-input { flex:1; border:none; background:#fff; outline:none; padding: 12px 0; font-size:14px; color: var(--kc-ink); font-family: inherit; }
+      .kc-insp-search-input { flex:1; border:none; background:none; outline:none; padding: 12px 0; font-size:14px; color: var(--kc-ink); font-family: inherit; }
       .kc-insp-more { width:38px; padding:9px 0; text-align:center; }
 
       /* INSPIRATION PAGE — sidebar + masonry layout */

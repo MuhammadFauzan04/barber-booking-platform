@@ -4,10 +4,11 @@
 import { ArrowRight, BadgeCheck, Banknote, Bell, Brain, Calendar, CalendarCheck, Check, Clock, CreditCard, Crown, Droplet, ExternalLink, Flame, Gift, Hand, Home, Lightbulb, MapPinned, QrCode, Scissors, Smartphone, Sparkles, Star, Tag, Ticket, Timer, User, Wallet, Waves, Wind } from "lucide-react";
 
 export const BRANCHES = [
-  { id: "kmg", name: "Cartenz Perints", city: "Makassar" },
-  { id: "kby", name: "Cartenz Bau Mangga", city: "Makassar" },
-  { id: "dago", name: "CartenzSinga", city: "Makassar" },
-  { id: "cpi", name: "Cartenz CPI", city: "Makassar", isNew: true },
+  { id: "kmg", name: "Kemang", city: "Jakarta Selatan" },
+  { id: "kby", name: "Kebayoran Baru", city: "Jakarta Selatan" },
+  { id: "dago", name: "Dago", city: "Bandung" },
+  { id: "drm", name: "Darmo", city: "Surabaya" },
+  { id: "cpi", name: "Centre Point", city: "Makassar", isNew: true },
 ];
 
 export const CAPSTERS = [
