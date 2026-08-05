@@ -8,6 +8,7 @@ import {
   BarChart3, Building2, ChevronDown, ChevronRight,
   LayoutDashboard, LayoutGrid, LogOut, ShieldCheck, TrendingUp,
 } from "lucide-react";
+import { canManageBackup, canManageUsers } from "../scope";
 
 const NAV_TREE = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -59,11 +60,21 @@ const NAV_TREE = [
   },
 ];
 
-export function Sidebar({ page, go, onLogout, mobileOpen, setMobileOpen }) {
+export function Sidebar({ page, go, onLogout, mobileOpen, setMobileOpen, user }) {
   const activeParent = NAV_TREE.find(
     (item) => item.id === page || item.children?.some((c) => c.id === page)
   )?.id;
   const [openGroup, setOpenGroup] = useState(activeParent || "dashboard");
+
+  const visibleTree = NAV_TREE.map((item) => {
+    if (!item.children) return item;
+    const children = item.children.filter((c) => {
+      if (c.id === "pengaturan-role") return canManageUsers(user);
+      if (c.id === "pengaturan-backup") return canManageBackup(user);
+      return true;
+    });
+    return { ...item, children };
+  });
 
   const handleParentClick = (item) => {
     if (item.children) {
@@ -94,9 +105,12 @@ export function Sidebar({ page, go, onLogout, mobileOpen, setMobileOpen }) {
             <div className="adm-sidebar-brand-sub">Admin Panel</div>
           </div>
         </div>
+        {user && user.branch !== "Semua Cabang" && (
+          <div className="adm-sidebar-scope">Mengelola cabang: <b>{user.branch}</b></div>
+        )}
 
         <nav className="adm-sidebar-nav">
-          {NAV_TREE.map((item) => {
+          {visibleTree.map((item) => {
             const Icon = item.icon;
             const isOpen = openGroup === item.id;
             const isActiveParent = item.id === page;

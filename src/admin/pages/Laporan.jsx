@@ -5,10 +5,12 @@ import {
   LAPORAN_PENDAPATAN, LAPORAN_BOOKING, LAPORAN_CUSTOMER,
   LAPORAN_LOYALITAS, LAPORAN_RATING, rupiah,
 } from "../adminData";
+import { isSuperScope, scopeByBranch } from "../scope";
 
-function PendapatanReport() {
-  const totalBulanIni = LAPORAN_PENDAPATAN.reduce((s, r) => s + r.bulanIni, 0);
-  const totalBulanLalu = LAPORAN_PENDAPATAN.reduce((s, r) => s + r.bulanLalu, 0);
+function PendapatanReport({ user }) {
+  const data = scopeByBranch(LAPORAN_PENDAPATAN, user, ["cabang"]);
+  const totalBulanIni = data.reduce((s, r) => s + r.bulanIni, 0);
+  const totalBulanLalu = data.reduce((s, r) => s + r.bulanLalu, 0);
   const growth = (((totalBulanIni - totalBulanLalu) / totalBulanLalu) * 100).toFixed(1);
   const columns = [
     { key: "cabang", label: "Cabang" },
@@ -22,14 +24,16 @@ function PendapatanReport() {
       },
     },
   ];
+  const top = [...data].sort((a, b) => b.bulanIni - a.bulanIni)[0];
   return (
     <>
+      {!isSuperScope(user) && <div className="adm-locked-note">Laporan khusus cabang <b>{user.branch}</b>.</div>}
       <div className="adm-stat-grid">
         <StatCard label="Total Pendapatan Bulan Ini" value={rupiah(totalBulanIni)} trend={`${growth >= 0 ? "+" : ""}${growth}% dari bulan lalu`} tone={growth >= 0 ? "up" : "down"} />
         <StatCard label="Total Pendapatan Bulan Lalu" value={rupiah(totalBulanLalu)} />
-        <StatCard label="Cabang Terlaris" value={LAPORAN_PENDAPATAN[0].cabang} trend={rupiah(LAPORAN_PENDAPATAN[0].bulanIni)} tone="up" />
+        {isSuperScope(user) && <StatCard label="Cabang Terlaris" value={top.cabang} trend={rupiah(top.bulanIni)} tone="up" />}
       </div>
-      <DataTable title="Pendapatan per Cabang" columns={columns} data={LAPORAN_PENDAPATAN} searchKeys={["cabang"]} />
+      <DataTable title="Pendapatan per Cabang" columns={columns} data={data} searchKeys={["cabang"]} />
     </>
   );
 }
@@ -79,14 +83,15 @@ function LoyalitasReport() {
   );
 }
 
-function RatingReport() {
+function RatingReport({ user }) {
+  const data = scopeByBranch(LAPORAN_RATING, user, ["cabang"]);
   const columns = [
     { key: "capster", label: "Capster" },
     { key: "cabang", label: "Cabang" },
     { key: "rating", label: "Rating", render: (r) => <span className="adm-inline-icon"><Star size={13} fill="#C79A3E" stroke="#C79A3E" /> {r.rating.toFixed(1)}</span> },
     { key: "reviews", label: "Jumlah Ulasan" },
   ];
-  return <DataTable title="Peringkat Rating Capster" columns={columns} data={LAPORAN_RATING} searchKeys={["capster", "cabang"]} />;
+  return <DataTable title="Peringkat Rating Capster" columns={columns} data={data} searchKeys={["capster", "cabang"]} />;
 }
 
 function ExportReport() {
@@ -124,14 +129,14 @@ function ExportReport() {
   );
 }
 
-export function Laporan({ page }) {
+export function Laporan({ page, user }) {
   return (
     <div className="adm-page">
-      {page === "laporan-pendapatan" && <PendapatanReport />}
+      {page === "laporan-pendapatan" && <PendapatanReport user={user} />}
       {page === "laporan-booking" && <BookingReport />}
       {page === "laporan-customer" && <CustomerReport />}
       {page === "laporan-loyalitas" && <LoyalitasReport />}
-      {page === "laporan-rating" && <RatingReport />}
+      {page === "laporan-rating" && <RatingReport user={user} />}
       {page === "laporan-export" && <ExportReport />}
     </div>
   );

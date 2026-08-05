@@ -79,13 +79,13 @@ export const MONITORING_CAPSTERS = CAPSTERS.map((c, i) => ({
 }));
 
 export const MONITORING_CUSTOMERS = [
-  { id: "u1", name: "Andi Wijaya", phone: "0812-3456-7890", email: "andi.wijaya@mail.com", tier: "Silver", totalBooking: 18, totalSpend: 1850000, joined: "Jan 2025" },
-  { id: "u2", name: "Rizky Ramadhan", phone: "0813-2211-9087", email: "rizky.r@mail.com", tier: "Gold", totalBooking: 34, totalSpend: 4620000, joined: "Aug 2024" },
-  { id: "u3", name: "Farhan Maulana", phone: "0857-6612-0031", email: "farhan.m@mail.com", tier: "Silver", totalBooking: 7, totalSpend: 610000, joined: "Mar 2026" },
-  { id: "u4", name: "Budi Santoso", phone: "0821-4477-2290", email: "budi.s@mail.com", tier: "Bronze", totalBooking: 2, totalSpend: 145000, joined: "Jun 2026" },
-  { id: "u5", name: "Teguh Prasetyo", phone: "0878-9012-3345", email: "teguh.p@mail.com", tier: "Gold", totalBooking: 41, totalSpend: 5980000, joined: "Feb 2024" },
-  { id: "u6", name: "Hendra Gunawan", phone: "0895-1123-4409", email: "hendra.g@mail.com", tier: "Silver", totalBooking: 12, totalSpend: 1230000, joined: "Nov 2025" },
-  { id: "u7", name: "Sandi Kurniawan", phone: "0817-7734-2201", email: "sandi.k@mail.com", tier: "Bronze", totalBooking: 1, totalSpend: 75000, joined: "Jul 2026" },
+  { id: "u1", name: "Andi Wijaya", phone: "0812-3456-7890", email: "andi.wijaya@mail.com", tier: "Silver", branch: "Centre Point", points: 320, status: "Aktif", totalBooking: 18, totalSpend: 1850000, joined: "Jan 2025" },
+  { id: "u2", name: "Rizky Ramadhan", phone: "0813-2211-9087", email: "rizky.r@mail.com", tier: "Gold", branch: "Kemang", points: 640, status: "Aktif", totalBooking: 34, totalSpend: 4620000, joined: "Aug 2024" },
+  { id: "u3", name: "Farhan Maulana", phone: "0857-6612-0031", email: "farhan.m@mail.com", tier: "Silver", branch: "Kemang", points: 180, status: "Aktif", totalBooking: 7, totalSpend: 610000, joined: "Mar 2026" },
+  { id: "u4", name: "Budi Santoso", phone: "0821-4477-2290", email: "budi.s@mail.com", tier: "Bronze", branch: "Kebayoran Baru", points: 40, status: "Aktif", totalBooking: 2, totalSpend: 145000, joined: "Jun 2026" },
+  { id: "u5", name: "Teguh Prasetyo", phone: "0878-9012-3345", email: "teguh.p@mail.com", tier: "Gold", branch: "Dago", points: 890, status: "Aktif", totalBooking: 41, totalSpend: 5980000, joined: "Feb 2024" },
+  { id: "u6", name: "Hendra Gunawan", phone: "0895-1123-4409", email: "hendra.g@mail.com", tier: "Silver", branch: "Kebayoran Baru", points: 260, status: "Aktif", totalBooking: 12, totalSpend: 1230000, joined: "Nov 2025" },
+  { id: "u7", name: "Sandi Kurniawan", phone: "0817-7734-2201", email: "sandi.k@mail.com", tier: "Bronze", branch: "Kebayoran Baru", points: 15, status: "Nonaktif", totalBooking: 1, totalSpend: 75000, joined: "Jul 2026" },
 ];
 
 export const MONITORING_CABANG = BRANCHES.map((b, i) => ({
@@ -184,6 +184,9 @@ export const ADMIN_ROLES = [
   { id: "r3", name: "Fadli Ahmad", email: "fadli.a@cartenz.id", role: "Admin Cabang", branch: "Centre Point", status: "Aktif" },
   { id: "r4", name: "Rina Kusuma", email: "rina.k@cartenz.id", role: "Finance", branch: "Semua Cabang", status: "Nonaktif" },
 ];
+
+/* Convenience list used by the role switcher — only active accounts. */
+export const SWITCHABLE_USERS = ADMIN_ROLES.filter((r) => r.status === "Aktif");
 
 export const ADMIN_NOTIF_SETTINGS = [
   { id: "n1", label: "Booking baru masuk", desc: "Notifikasi saat customer membuat booking baru", enabled: true },

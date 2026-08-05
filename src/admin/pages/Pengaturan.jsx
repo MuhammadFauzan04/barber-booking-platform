@@ -5,6 +5,7 @@ import {
   ADMIN_ROLES, ADMIN_NOTIF_SETTINGS, ADMIN_JAM_OPERASIONAL,
   ADMIN_PAYMENT_SETTINGS, ADMIN_BACKUP_LOG,
 } from "../adminData";
+import { canManageUsers, canManageBackup } from "../scope";
 
 function RoleUserSection() {
   const [rows, setRows] = useState(ADMIN_ROLES);
@@ -180,7 +181,15 @@ function BackupSection() {
   );
 }
 
-export function Pengaturan({ page }) {
+export function Pengaturan({ page, user }) {
+  const restricted = (page === "pengaturan-role" && !canManageUsers(user)) || (page === "pengaturan-backup" && !canManageBackup(user));
+  if (restricted) {
+    return (
+      <div className="adm-page">
+        <div className="adm-locked-note">Halaman ini khusus Super Admin. Kamu login sebagai {user.role} ({user.branch}).</div>
+      </div>
+    );
+  }
   return (
     <div className="adm-page">
       {page === "pengaturan-role" && <RoleUserSection />}

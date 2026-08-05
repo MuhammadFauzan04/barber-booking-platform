@@ -36,10 +36,11 @@ export function Header({ stage, go, branch, setBranch, points, menuOpen, setMenu
     <header className="kc-header">
       <PromoBar />
       <div className="kc-header-row">
-          <button className="kc-logo" onClick={() => go("home")}>
-            <img  src="/logo.png" alt="Logo"className="kc-logo-image"/>
-            <div className="kc-logo-text"> <span className="kc-logo-main">CARTENZ</span> </div>
-          </button>
+     <button className="kc-logo" onClick={() => go("home")}>
+        <img src="/logo.png" alt="Logo" className="kc-logo-image"/>
+          <div className="kc-logo-text">
+          <span className="kc-logo-main">CARTENZ</span> </div>
+      </button>
 
         <nav className="kc-nav-desktop">
           {NAV_ITEMS.map((it) => {

@@ -1,5 +1,6 @@
-import React from "react";
-import { Bell, Menu, Search } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Bell, Check, ChevronDown, Menu, Search, UserCog } from "lucide-react";
+import { SWITCHABLE_USERS } from "../adminData";
 
 const PAGE_TITLES = {
   "dashboard": "Dashboard",
@@ -30,9 +31,19 @@ const PAGE_TITLES = {
   "pengaturan-backup": "Pengaturan Sistem / Backup Database",
 };
 
-export function Topbar({ page, user, onMenuClick }) {
+export function Topbar({ page, user, onMenuClick, onSwitchUser }) {
   const title = PAGE_TITLES[page] || "Dashboard";
   const initials = (user.name || "Admin").split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+  const [switcherOpen, setSwitcherOpen] = useState(false);
+  const switcherRef = useRef(null);
+
+  useEffect(() => {
+    const onDocClick = (e) => {
+      if (switcherRef.current && !switcherRef.current.contains(e.target)) setSwitcherOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, []);
 
   return (
     <header className="adm-topbar">
@@ -49,12 +60,35 @@ export function Topbar({ page, user, onMenuClick }) {
           <Bell size={17} />
           <span className="adm-topbar-bell-dot" />
         </button>
-        <div className="adm-topbar-user">
-          <span className="adm-topbar-avatar">{initials}</span>
-          <span className="adm-topbar-user-text">
-            <span className="adm-topbar-user-name">{user.name}</span>
-            <span className="adm-topbar-user-role">{user.role}</span>
-          </span>
+        <div className="adm-user-switcher" ref={switcherRef}>
+          <button className="adm-topbar-user" onClick={() => setSwitcherOpen((v) => !v)}>
+            <span className="adm-topbar-avatar">{initials}</span>
+            <span className="adm-topbar-user-text">
+              <span className="adm-topbar-user-name">{user.name}</span>
+              <span className="adm-topbar-user-role">{user.role} &middot; {user.branch}</span>
+            </span>
+            <ChevronDown size={14} className={"adm-user-switcher-caret" + (switcherOpen ? " open" : "")} />
+          </button>
+          {switcherOpen && (
+            <div className="adm-user-switcher-dropdown">
+              <div className="adm-user-switcher-hint">
+                <UserCog size={13} /> Demo: coba ganti peran login
+              </div>
+              {SWITCHABLE_USERS.map((u) => (
+                <button
+                  key={u.id}
+                  className={"adm-user-switcher-option" + (u.email === user.email ? " active" : "")}
+                  onClick={() => { onSwitchUser(u); setSwitcherOpen(false); }}
+                >
+                  <span className="adm-user-switcher-option-text">
+                    <span className="adm-user-switcher-option-name">{u.name}</span>
+                    <span className="adm-user-switcher-option-role">{u.role} &middot; {u.branch}</span>
+                  </span>
+                  {u.email === user.email && <Check size={14} />}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </header>

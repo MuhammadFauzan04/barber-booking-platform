@@ -4,10 +4,11 @@ import {
   ADMIN_CABANG, ADMIN_LAYANAN, ADMIN_CAPSTER, ADMIN_JADWAL, ADMIN_PROMO,
   ADMIN_VOUCHER, ADMIN_MEMBERSHIP, ADMIN_INSPIRASI, ADMIN_BANNER, rupiah,
 } from "../adminData";
+import { isSuperScope, scopeByBranch } from "../scope";
 
 /* Generic CRUD section: local state + DataTable + a small "add" modal
    whose fields are described declaratively per entity. */
-function CrudSection({ title, addLabel, initialData, columns, fields, buildRow, searchKeys }) {
+function CrudSection({ title, addLabel, initialData, columns, fields, buildRow, searchKeys, canAdd = true, lockedNote }) {
   const [rows, setRows] = useState(initialData);
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({});
@@ -23,14 +24,15 @@ function CrudSection({ title, addLabel, initialData, columns, fields, buildRow, 
 
   return (
     <>
+      {lockedNote && <div className="adm-locked-note">{lockedNote}</div>}
       <DataTable
         title={title}
         addLabel={addLabel}
         columns={columns}
         data={rows}
         searchKeys={searchKeys}
-        onAdd={() => setOpen(true)}
-        onDelete={handleDelete}
+        onAdd={canAdd ? () => setOpen(true) : undefined}
+        onDelete={canAdd ? handleDelete : undefined}
       />
       {open && (
         <Modal title={addLabel} onClose={() => setOpen(false)}>
@@ -58,15 +60,18 @@ function CrudSection({ title, addLabel, initialData, columns, fields, buildRow, 
 
 const uid = (prefix) => `${prefix}-${Date.now().toString(36)}`;
 
-export function KelolaData({ page }) {
+export function KelolaData({ page, user }) {
+  const superScope = isSuperScope(user);
   return (
     <div className="adm-page">
       {page === "kelola-cabang" && (
         <CrudSection
           title="Kelola Cabang"
           addLabel="Tambah Cabang"
-          initialData={ADMIN_CABANG}
+          initialData={scopeByBranch(ADMIN_CABANG, user, ["name"])}
           searchKeys={["name", "city", "address"]}
+          canAdd={superScope}
+          lockedNote={!superScope ? `Kamu login sebagai Admin Cabang ${user.branch} — hanya bisa melihat & mengubah data cabang sendiri. Tambah/hapus cabang baru khusus Super Admin.` : null}
           columns={[
             { key: "name", label: "Nama Cabang" },
             { key: "city", label: "Kota" },
@@ -112,7 +117,7 @@ export function KelolaData({ page }) {
         <CrudSection
           title="Kelola Capster"
           addLabel="Tambah Capster"
-          initialData={ADMIN_CAPSTER}
+          initialData={scopeByBranch(ADMIN_CAPSTER, user, ["branchName"])}
           searchKeys={["name", "branchName"]}
           columns={[
             { key: "name", label: "Nama" },
@@ -134,7 +139,7 @@ export function KelolaData({ page }) {
         <CrudSection
           title="Kelola Jadwal Capster"
           addLabel="Tambah Jadwal"
-          initialData={ADMIN_JADWAL}
+          initialData={scopeByBranch(ADMIN_JADWAL, user, ["branch"])}
           searchKeys={["capster", "branch"]}
           columns={[
             { key: "capster", label: "Capster" },
