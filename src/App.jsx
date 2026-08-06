@@ -6,6 +6,7 @@ import "./index.css";
 import React, { useState } from "react";
 import { AuthGate } from "./components/AuthGate";
 import { Footer } from "./components/Footer";
+import { GuestBookingPrompt } from "./components/GuestBookingPrompt";
 import { Header } from "./components/Navbar";
 import { REDEEMABLE_VOUCHERS, SERVICES } from "./data/barbershop";
 import { BookingSuccessTicket, DateTimeStep, JourneyTimeline, PaymentFailed, PaymentStep, PaymentSuccess, PointRewardScreen, ProcessingStep, ReviewScreen, ServiceStep, VoucherStep } from "./pages/BookingFlow";
@@ -18,6 +19,11 @@ import { PointsPage } from "./pages/PointsPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { PromoPage } from "./pages/PromoPage";
 import { ServicesPage } from "./pages/ServicesPage";
+
+/* Stages that represent the start of an actual booking action. A guest
+   (userName === "") is intercepted here and shown a login/register prompt
+   instead of being allowed to proceed. */
+const BOOKING_GATE_STAGES = ["capsterDetail", "dateTime"];
 
 export default function App() {
   const [stage, setStage] = useState("auth");
@@ -32,15 +38,33 @@ export default function App() {
   const [wallet, setWallet] = useState(() => Array.from({ length: 5 }, () => REDEEMABLE_VOUCHERS[0]));
   const [lastTotal, setLastTotal] = useState(0);
   const [earnedPoints, setEarnedPoints] = useState(0);
+  const [guestPrompt, setGuestPrompt] = useState(false);
+  const [pendingBooking, setPendingBooking] = useState(null);
+  const [authMode, setAuthMode] = useState("register");
 
-  const go = (next, payload = {}) => {
+  const go = (next, payload = {}, opts = {}) => {
+    if (!opts.skipGate && BOOKING_GATE_STAGES.includes(next) && !userName) {
+      setPendingBooking({ stage: next, payload });
+      setGuestPrompt(true);
+      return;
+    }
     if (payload.capster) setCapster(payload.capster);
     if (typeof payload.total === "number") setLastTotal(payload.total);
     setStage(next);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleEnter = (name, guest) => { setUserName(guest ? "" : name); go("home"); };
+  const handleEnter = (name, guest) => {
+    setUserName(guest ? "" : name);
+    if (!guest && pendingBooking) {
+      const { stage: pStage, payload: pPayload } = pendingBooking;
+      setPendingBooking(null);
+      go(pStage, pPayload, { skipGate: true });
+    } else {
+      setPendingBooking(null);
+      go("home");
+    }
+  };
 
   const handleProcessed = (ok) => {
     if (ok) go("success", {}); else go("failed", { capster });
@@ -69,6 +93,10 @@ export default function App() {
     go("auth");
   };
 
+  const openGuestLogin = () => { setAuthMode("login"); setGuestPrompt(false); setStage("auth"); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const openGuestRegister = () => { setAuthMode("register"); setGuestPrompt(false); setStage("auth"); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const closeGuestPrompt = () => { setGuestPrompt(false); setPendingBooking(null); };
+
   return (
     <div className="kc-root">
       {stage !== "auth" && (
@@ -76,7 +104,7 @@ export default function App() {
           branch={branch} setBranch={setBranch} points={points} menuOpen={menuOpen} setMenuOpen={setMenuOpen} userName={userName} onLogout={handleLogout} />
       )}
 
-      {stage === "auth" && <AuthGate onEnter={handleEnter} />}
+      {stage === "auth" && <AuthGate key={authMode} initialMode={authMode} onEnter={handleEnter} />}
       {stage === "home" && <Home branch={branch} go={go} points={points} />}
       {stage === "services" && <ServicesPage go={go} />}
       {stage === "promo" && <PromoPage go={go} />}
@@ -99,6 +127,10 @@ export default function App() {
       {stage === "history" && <HistoryPage go={go} />}
 
       {stage !== "auth" && <Footer go={go} />}
+
+      {guestPrompt && (
+        <GuestBookingPrompt onLogin={openGuestLogin} onRegister={openGuestRegister} onClose={closeGuestPrompt} />
+      )}
     </div>
   );
 }

@@ -23,6 +23,7 @@ export function Tabs({ tabs, active, onChange }) {
       {tabs.map((t) => (
         <button key={t.id} className={"adm-tab" + (active === t.id ? " active" : "")} onClick={() => onChange(t.id)}>
           {t.label}
+          {t.count !== undefined && <span className="adm-tab-count">{t.count}</span>}
         </button>
       ))}
     </div>

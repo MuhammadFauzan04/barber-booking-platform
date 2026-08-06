@@ -209,7 +209,7 @@ export function Home({ branch, go, points }) {
         </div>
         <Reveal className="kc-ig-follow">
           <div className="kc-ig-avatar"><Mountain size={22} /></div>
-          <div className="kc-ig-info">
+          <div className="kc-ig-info">  
             <div className="kc-ig-handle">{INSTAGRAM_STATS.handle}</div>
             <div className="kc-ig-meta">{INSTAGRAM_STATS.posts} kiriman · {INSTAGRAM_STATS.followers} pengikut · {INSTAGRAM_STATS.following} diikuti</div>
           </div>
